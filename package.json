@@ -1,0 +1,19 @@
+{
+  "name": "javascript-idisyncracies",
+  "version": "0.0.1",
+  "description": "This repository contains a collection of sample scripts that showcase unique and sometimes surprising JavaScript behavior. The intended audience is Java or C# devs who are not very familiar with JavaScript.",
+  "main": "./dist/duck-typing/index.js",
+  "scripts": {
+    "build": "rm -r -d dist && tsc",
+    "test": "jest test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@nwlongnecker:nwlongnecker/javascript-idiosyncracies.git"
+  },
+  "author": "nwlongnecker",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
