@@ -10,6 +10,10 @@
     "object-destructuring": "yarn run build && node ./dist/3-object-destructuring",
     "spread-operator": "yarn run build && node ./dist/4-spread-operator",
     "javascript-is-interpreted": "yarn run build && node ./dist/5-javascript-is-interpreted",
+    "classes": "yarn run build && node ./dist/6-classes",
+    "monkey-patching": "yarn run build && node ./dist/7-monkey-patching",
+    "prototypes": "yarn run build && node ./dist/8-prototypes",
+    "closures": "yarn run build && node ./dist/9-closures",
     "test": "jest test"
   },
   "repository": {
