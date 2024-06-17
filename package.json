@@ -5,6 +5,11 @@
   "main": "./dist/duck-typing/index.js",
   "scripts": {
     "build": "rm -r -d dist && tsc",
+    "duck-typing": "yarn run build && node ./dist/1-duck-typing",
+    "types-are-build-time-only": "yarn run build && node ./dist/2-types-are-build-time-only",
+    "object-destructuring": "yarn run build && node ./dist/3-object-destructuring",
+    "spread-operator": "yarn run build && node ./dist/4-spread-operator",
+    "javascript-is-interpreted": "yarn run build && node ./dist/5-javascript-is-interpreted",
     "test": "jest test"
   },
   "repository": {

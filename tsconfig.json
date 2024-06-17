@@ -7,7 +7,7 @@
         "rootDir": "src",
 
         "allowJs": true,
-        "checkJs": true,
+        "checkJs": false,
 
         /* Linting */
         "strict": true,
