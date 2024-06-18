@@ -14,6 +14,10 @@
     "monkey-patching": "yarn run build && node ./dist/7-monkey-patching",
     "prototypes": "yarn run build && node ./dist/8-prototypes",
     "closures": "yarn run build && node ./dist/9-closures",
+    "beware-this": "yarn run build && node ./dist/10-beware-this",
+    "callbacks": "yarn run build && node ./dist/11-callbacks",
+    "promises": "yarn run build && node ./dist/12-promises",
+    "async-await": "yarn run build && node ./dist/13-async-await",
     "test": "jest test"
   },
   "repository": {
