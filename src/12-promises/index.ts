@@ -7,56 +7,20 @@
  * article is old but very, very good at explaining promises:
  * https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
  * 
+ * The below demonstrates how Promises help to flatten the logic flow compared to what callbacks offered,
+ * and we can have a single catch at the end to handle errors anywhere in the chain.
  * Note that different stages of the Promise chain can return either promises or synchronous values, either works!
  */
 
-interface Carton {
-    count: number
-    price: number
-    size: string
-}
+import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { inFileName, outDirName, outFileName, processFileData } from '../async-programming-helpers/helpers';
 
-const purchaseFromStore = (result: Carton): Promise<Carton> => {
-    return new Promise(resolve => setTimeout(() => resolve(result), Math.random() * 100));
-}
-
-const carryInside = (carton: Carton): Carton => {
-    if (carton.size === "medium") {
-        throw new Error(`The ${carton.size} eggs got dropped!`);
-    }
-    return carton;
-}
-
-const cookAndEat = (carton: Carton): Promise<Carton> => {
-    return Promise.resolve({
-        ...carton,
-        count: carton.count - 2
-    })
-}
-
-const errorHandler = (error: Error) => console.error(error.message);
-
-const largeEggs: Carton = {
-    count: 12,
-    size: "large",
-    price: 599
-}
-const mediumEggs: Carton = {
-    count: 12,
-    size: "medium",
-    price: 499
-}
-
-purchaseFromStore(largeEggs)
-    .then(carryInside)
-    .then(cookAndEat)
-    .then(console.log)
-    .catch(errorHandler);
-
-purchaseFromStore(mediumEggs)
-    .then(carryInside)
-    .then(cookAndEat)
-    .then(console.log)
-    .catch(errorHandler);
+readFile(inFileName, 'ascii')
+    .then(processFileData)
+    // This line is a little wonky to handle piping the data along to the next promise in the chain
+    .then(processedData => mkdir(outDirName).then(() => processedData))
+    .then(processedData => writeFile(outFileName, processedData))
+    .then(() => console.log(`Successfully processed the file and wrote the result to ${outFileName}`))
+    .catch((err) => console.error("Error reading and processing the file", err));
 
 // `yarn run promises` to execute this file

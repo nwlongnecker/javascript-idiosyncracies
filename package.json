@@ -4,7 +4,7 @@
   "description": "This repository contains a collection of sample scripts that showcase unique and sometimes surprising JavaScript behavior. The intended audience is Java or C# devs who are not very familiar with JavaScript.",
   "main": "./dist/duck-typing/index.js",
   "scripts": {
-    "build": "rm -r -d dist && tsc",
+    "build": "rm -rf -d dist && rm -rf -d out && tsc",
     "duck-typing": "yarn run build && node ./dist/1-duck-typing",
     "types-are-build-time-only": "yarn run build && node ./dist/2-types-are-build-time-only",
     "object-destructuring": "yarn run build && node ./dist/3-object-destructuring",
@@ -27,6 +27,7 @@
   "author": "nwlongnecker",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^20.14.9",
     "typescript": "^5.4.5"
   }
 }

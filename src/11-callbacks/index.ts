@@ -3,43 +3,36 @@
  * Async/await is the newest and is easiest to use and therefore generally preferred,
  * but knowlege of the others is helpful because those patterns still exist in the wild.
  * 
- * Callbacks are the oldest way to handle async programming. The community has standardized on a pattern of
- * having the last two parameters for an async function be `resolve` and `reject`. When the async work is completed
- * or has an error, the corresponding function is invoked.
+ * Callbacks are the oldest way to handle async programming. Sometimes it is implemented by having the last parameter
+ * be a callback that accepts both an error object and a data object, with the appropriate one populated based on the
+ * result of the async function, and other times it is implemented by having the last two parameters be `resolve` and
+ * `reject`. When the async work is completed or has an error, the corresponding function is invoked.
+ * 
+ * Note that it is very easy to get very deeply nested code when using callbacks.
  */
+import { readFile, mkdir, writeFile } from 'node:fs';
+import { inFileName, outDirName, outFileName, processFileData } from '../async-programming-helpers/helpers';
 
-type Resolve = (result: string) => void;
-type Reject = (error: Error) => void;
-type Pet = {
-    name: string;
-    anxiety: number;
-}
 
-const visitVet = (pet: Pet, resolve: Resolve, reject: Reject): void => {
-    // do any asynchronous processing needed, mimicked by a random delay
-    setTimeout(() => {
-        if (pet.anxiety > 10) {
-            reject(new Error(`${pet.name} was too anxious to go to the vet today`));
-        } else {
-            resolve(`${pet.name} had a pleasant time at the vet`);
-        }
-    }, Math.random() * 10);
-}
-
-const pets = [{
-    name: 'Rhino',
-    anxiety: 1,
-}, {
-    name: 'Mica',
-    anxiety: 15
-}, {
-    name: 'Pickles',
-    anxiety: 9,
-}];
-
-const successfulVisit = (outcome: string) => console.log(outcome);
-const unsuccessfulVisit = (error: Error) => console.error(error.message);
-
-pets.forEach(pet => visitVet(pet, successfulVisit, unsuccessfulVisit));
+readFile(inFileName, 'ascii', (err: NodeJS.ErrnoException | null, data: string) => {
+    if (err) {
+        console.error("Error reading file", err);
+    } else {
+        const newFileData = processFileData(data);
+        mkdir(outDirName, (err: NodeJS.ErrnoException | null) => {
+            if (err) {
+                console.error("Error creating outDir", err);
+            } else {
+                writeFile(outFileName, newFileData, (err: NodeJS.ErrnoException | null) => {
+                    if (err) {
+                        console.error("Error creating outDir", err);
+                    } else {
+                        console.log(`Successfully processed the file and wrote the result to ${outFileName}`);
+                    }
+                })
+            }
+        })
+    }
+});
 
 // `yarn run callbacks` to execute this file
