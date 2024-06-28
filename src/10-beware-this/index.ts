@@ -1,9 +1,11 @@
 /*
- * Beware of the `this` keyword; it's frequently misleading in JavaScript. It can reference different things depending on the context in which its used.
+ * Beware of the `this` keyword; it's frequently misleading in JavaScript. It can reference different things
+ * depending on the context in which its used.
  * In general, it's better not to use `this` and instead explicitly reference whichever object you care about.
  * 
- * In JavaScript, functions declared using the function() {} syntax redefine this, while functions declared using the () => {} syntax do not. If you're using `this`,
- * and someone changes the way the wrapping function is declared, it can change what `this` refers to!
+ * In JavaScript, functions declared using the function() {} syntax redefine this, while functions declared
+ * using the () => {} syntax do not. If you're using `this`, and someone changes the way the wrapping function
+ * is declared, it can change what `this` refers to!
  * 
  * Try running the example below: `yarn run beware-this`
  * You might be surprised at the output!

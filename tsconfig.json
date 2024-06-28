@@ -6,6 +6,9 @@
         "outDir": "dist",
         "rootDir": "src",
 
+        "allowJs": true,
+        "checkJs": false,
+
         /* Linting */
         "strict": true,
         "noUnusedLocals": true,

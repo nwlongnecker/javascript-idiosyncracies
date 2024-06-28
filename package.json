@@ -18,6 +18,8 @@
     "callbacks": "yarn run build && node ./dist/11-callbacks",
     "promises": "yarn run build && node ./dist/12-promises",
     "async-await": "yarn run build && node ./dist/13-async-await",
+    "numbers": "yarn run build && node ./dist/14-numbers",
+    "equals": "yarn run build && node ./dist/15-equals",
     "test": "jest test"
   },
   "repository": {
